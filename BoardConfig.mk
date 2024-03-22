@@ -33,21 +33,44 @@ TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOOTLOADER_BOARD_NAME := MSM8916
 TARGET_NO_BOOTLOADER := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom ehci-hcd.park=3 vmalloc=400M androidboot.bootdevice=soc.0  movablecore=160M androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom ehci-hcd.park=3 vmalloc=400M androidboot.bootdevice=7824900.sdhci movablecore=160M androidboot.selinux=permissive
 
 # Prebuilt
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
-# We are using a prebuilt image so we don't need to build kernel
-# BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dt.img
+
+# We aren't building the kernel because it's already prebuilt
 # TARGET_KERNEL_SOURCE := kernel/motorola/msm8916
 # TARGET_KERNEL_CONFIG := surnia_defconfig
-# BOARD_KERNEL_IMAGE_NAME := Image
 
+BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --dtb $(TARGET_PREBUILT_DTB)
 BOARD_RAMDISK_OFFSET := 0x01000000
+# These are just for reference
+# BOARD_KERNEL_OFFSET := 0x00008000
+# BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
+# BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+# BOARD_DTB_OFFSET := 0x00000000
+
+# usage: mkbootimg
+#        --kernel <filename>
+#        --ramdisk <filename>
+#        [ --second <2ndbootloader-filename> ]
+#        [ --cmdline <kernel-commandline> ]
+#        [ --board <boardname> ]
+#        [ --base <address> ]
+#        [ --pagesize <pagesize> ]
+#        [ --ramdisk_offset <address> ]
+#        [ --dt <filename> ]
+#        -o|--output <filename>
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) 
+# BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET) --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
+BOARD_MKBOOTIMG_ARGS += --dt $(TARGET_PREBUILT_DTB)
+# Output is specified in bootimg.mk
+
+BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/bootimg.mk
 
 BOARD_USES_QCOM_HARDWARE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
