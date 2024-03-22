@@ -33,17 +33,10 @@ TARGET_BOARD_PLATFORM := msm8916
 TARGET_BOOTLOADER_BOARD_NAME := MSM8916
 TARGET_NO_BOOTLOADER := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom ehci-hcd.park=3 vmalloc=400M androidboot.bootdevice=7824900.sdhci movablecore=160M androidboot.selinux=permissive
+# BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom ehci-hcd.park=3 vmalloc=400M androidboot.bootdevice=7824900.sdhci movablecore=160M androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x3F ehci-hcd.park=3 vmalloc=400M androidboot.bootdevice=7824900.sdhci utags.blkdev=/dev/block/bootdevice/by-name/utags utags.backup=/dev/block/bootdevice/by-name/utagsBackup movablecore=160M androidboot.selinux=disabled
 
-# Prebuilt
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dt.img
-
-# We aren't building the kernel because it's already prebuilt
-# TARGET_KERNEL_SOURCE := kernel/motorola/msm8916
-# TARGET_KERNEL_CONFIG := surnia_defconfig
-
-BOARD_KERNEL_IMAGE_NAME := Image
+BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x01000000
@@ -52,6 +45,14 @@ BOARD_RAMDISK_OFFSET := 0x01000000
 # BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
 # BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 # BOARD_DTB_OFFSET := 0x00000000
+
+# Prebuilt
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dt.img
+
+# We aren't building the kernel because it's already prebuilt
+# TARGET_KERNEL_SOURCE := kernel/motorola/msm8916
+# TARGET_KERNEL_CONFIG := surnia_defconfig
 
 # usage: mkbootimg
 #        --kernel <filename>
@@ -105,7 +106,8 @@ DEVICE_RESOLUTION := 540x960
 TARGET_SCREEN_WIDTH := 540
 TARGET_SCREEN_HEIGHT := 960
 
-TARGET_RECOVERY_PIXEL_FORMAT := RGB_565
+# TARGET_RECOVERY_PIXEL_FORMAT := RGB_565
+TARGET_RECOVERY_PIXEL_FORMAT := RGBA_8888
 TW_NEW_ION_HEAP := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TW_SCREEN_BLANK_ON_BOOT := true

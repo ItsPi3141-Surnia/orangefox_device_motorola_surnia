@@ -38,13 +38,21 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     export ALLOW_MISSING_DEPENDENCIES=true
     export LC_ALL="C"
 
+    export FOX_TARGET_DEVICES=surnia
+
     export FOX_VANILLA_BUILD=1
+    export FOX_NO_SAMSUNG_SPECIAL=1
+    export TARGET_ARCH=arm
+    export OF_USE_LZMA_COMPRESSION=1
 
    	export TW_DEFAULT_LANGUAGE="en"
-	export OF_USE_GREEN_LED=0
-    export OF_DISABLE_MIUI_SPECIFIC_FEATURES=1
     export TW_THEME=portrait_hdpi
     export TW_MAX_BRIGHTNESS=255
+    export OF_DISABLE_MIUI_SPECIFIC_FEATURES=1
+    export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
+	export OF_USE_GREEN_LED=0
+    export OF_FLASHLIGHT_ENABLE=0
+    export OF_ALLOW_DISABLE_NAVBAR=0
 
 	# Screen
     export OF_SCREEN_H=960
