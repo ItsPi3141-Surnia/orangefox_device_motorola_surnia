@@ -19,15 +19,15 @@ DEVICE_PATH := device/motorola/surnia
 TARGET_ARCH := arm
 TARGET_CPU_ABI  := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := cortex-a53
-TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_VARIANT := cortex-a7
+TARGET_ARCH_VARIANT := armv7-a-neon
 
 # Deprecated
 # TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 # TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
 # Binder API version
-TARGET_USES_64_BIT_BINDER := true
+# TARGET_USES_64_BIT_BINDER := true
 
 TARGET_BOARD_PLATFORM := msm8916
 
