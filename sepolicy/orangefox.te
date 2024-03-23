@@ -1,0 +1,24 @@
+#============= kernel ==============
+allow kernel rootfs:file execute;
+
+#============= init ==============
+allow init kernel:security setcheckreqprot;
+allow init proc:file { getattr open read };
+allow init vendor_file:dir create;
+allow init vendor_file:lnk_file create;
+
+#============= recovery ==============
+allow recovery bluetooth_prop:file { getattr open };
+allow recovery boottime_prop:file { getattr open };
+allow recovery ctl_bootanim_prop:file { getattr open };
+allow recovery ctl_bugreport_prop:file { getattr open };
+allow recovery ctl_console_prop:file { getattr open };
+allow recovery default_prop:property_service set;
+allow recovery hwservicemanager_prop:property_service set;
+allow recovery self:capability sys_resource;
+allow recovery system_prop:property_service set;
+# allow recovery system_radio_prop:property_service set;
+allow recovery vndbinder_device:chr_file { read write open ioctl };
+
+#============= ueventd ==============
+allow ueventd proc:file { getattr open read };
