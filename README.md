@@ -45,6 +45,13 @@ git clone -b orangefox-12.1 https://github.com/ItsPi3141-Surnia/orangefox_device
 git clone https://github.com/LineageOS/android_vendor_qcom_opensource_cryptfs_hw ./vendor/qcom/opensource/commonsys/cryptfs_hw
 ```
 
+### Patch
+```bash
+mv ~/fox_12.1/device/motorola/surnia/patches ~/fox_12.1
+mv ~/fox_12.1/device/motorola/surnia/patch.sh ~/fox_12.1
+. ~/fox_12.1/patch.sh
+```
+
 ### Setup environment variables
 
 ```bash
