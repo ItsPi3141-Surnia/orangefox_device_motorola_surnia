@@ -1,0 +1,15 @@
+diff --git a/cryptfs_hw/cryptfs_hw.c b/cryptfs_hw/cryptfs_hw.c
+index 3067d9c..51b6b24 100755
+--- a/cryptfs_hw/cryptfs_hw.c
++++ b/cryptfs_hw/cryptfs_hw.c
+@@ -38,8 +38,8 @@
+ #include "cutils/log.h"
+ #include "cutils/properties.h"
+ #include "cutils/android_reboot.h"
+-#include "keymaster_common.h"
+-#include "hardware.h"
++#include <hardware/keymaster_common.h>
++#include <hardware/hardware.h>
+ 
+ 
+ // When device comes up or when user tries to change the password, user can

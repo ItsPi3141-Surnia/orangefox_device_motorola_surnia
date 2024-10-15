@@ -21,3 +21,4 @@ function patch {
 }
 
 patch 0001-libbinder.patch /frameworks/native/
+patch 0002-qcom-cryptfs_hw.patch /device/qcom/common/

@@ -1,9 +1,11 @@
 # OrangeFox tree for Moto E LTE (2015)
+
 **This is still a WIP. Don't expect it to work.**
 
-Make sure you use Linux. If you have Windows, use WSL. 
+Make sure you use Linux. If you have Windows, use WSL.
 
 ## ⚙️ Kernel source
+
 kernel (zImage) and device tree blob (dt.img) are already compiled  
 source: [MOTO-M8916/android_kernel_motorola_msm8916](https://github.com/MOTO-M8916/android_kernel_motorola_msm8916)
 
@@ -39,16 +41,19 @@ git clone -b orangefox-12.1 https://github.com/ItsPi3141-Surnia/orangefox_device
 
 ### Download additional dependencies
 
-#### cryptfs hw
+#### qcom common
 
 ```bash
-git clone https://github.com/LineageOS/android_vendor_qcom_opensource_cryptfs_hw ./vendor/qcom/opensource/commonsys/cryptfs_hw
+rm -rf ./device/qcom/common
+git clone https://github.com/TeamWin/android_device_qcom_common ./device/qcom/common -b android-9.0
+cp ./device/motorola/surnia/files/device_qcom_common_cryptfs-hw_Android.bp ./device/qcom/common/cryptfs_hw/Android.bp
 ```
 
 ### Patch
+
 ```bash
-mv ~/fox_12.1/device/motorola/surnia/patches ~/fox_12.1
-mv ~/fox_12.1/device/motorola/surnia/patch.sh ~/fox_12.1
+cp ~/fox_12.1/device/motorola/surnia/patches ~/fox_12.1 -r
+cp ~/fox_12.1/device/motorola/surnia/patch.sh ~/fox_12.1
 . ~/fox_12.1/patch.sh
 ```
 
@@ -70,4 +75,12 @@ export LC_ALL="C"
 ```bash
 lunch twrp_surnia-eng
 mka adbd recoveryimage
+```
+
+## 💡 Troubleshooting
+
+### `could not make way for new symlink: root/vendor`
+
+```bash
+rm -rf out/target/product/surnia/root/vendor
 ```

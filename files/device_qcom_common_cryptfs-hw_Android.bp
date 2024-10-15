@@ -1,0 +1,27 @@
+sourceFiles = ["cryptfs_hw.c"]
+
+commonSharedLibraries = [
+    "libcutils",
+    "libutils",
+    "libdl",
+    "libhardware",
+    "liblog",
+]
+
+cc_library_shared {
+    name: "libcryptfs_hw",
+    defaults: [
+      "legacy_hw_disk_encryption_defaults",
+    ],
+    header_libs: ["libhardware_headers"],
+    srcs: sourceFiles,
+    shared_libs: commonSharedLibraries,
+
+    owner: "qcom",
+    system_ext_specific: true,
+}
+
+cc_library_headers {
+    name: "libcryptfs_hw_headers",
+    export_include_dirs: ["."],
+}
