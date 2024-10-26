@@ -4,6 +4,7 @@ MKBOOTIMG := $(call my-dir)/binaries/mkbootimg
 $(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(INSTALLED_DTIMAGE_TARGET)
 	$(call pretty,"Target boot image: $@")
 	$(hide) $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
+	$(hide) $(call assert-max-image-size,$@,$(BOARD_BOOTIMAGE_PARTITION_SIZE),raw)
 	@echo -e ${CL_CYN}"Made boot image: $@"${CL_RST}
 
 ## Overload recoveryimg generation: Same as the original, + --dt arg

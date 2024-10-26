@@ -95,19 +95,19 @@ Download kernel source and cross compiler
 mkdir ~/surnia-kernel
 cd ~/surnia-kernel
 
-git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 --depth=1 -b ndk-release-r21
-git clone https://github.com/MOTO-M8916/android_kernel_motorola_msm8916 -b lineage-19.1 --depth=1
+git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9 --depth=1 -b lineage-19.1 toolchain
+git clone https://github.com/ItsPi3141-Surnia/kernel_motorola_msm8916 -b twrp --depth=1 kernel
 ```
 
 Set variables
 ```bash
-export CROSS_COMPILE=~/surnia-kernel/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+export CROSS_COMPILE=~/surnia-kernel/toolchain/bin/arm-linux-androideabi-
 export ARCH=arm && export SUBARCH=arm
 ```
 
 Build kernel
 ```bash
-cd ~/surnia-kernel/android_kernel_motorola_msm8916
+cd ~/surnia-kernel/kernel
 make surnia_defconfig
 make -j$(nproc --all)
 ```

@@ -68,8 +68,11 @@ TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
 #        [ --ramdisk_offset <address> ]
 #        [ --dt <filename> ]
 #        -o|--output <filename> # don't worry about this one, it's in bootimg.mk
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
+BOARD_MKBOOTIMG_ARGS := --kernel $(TARGET_PREBUILT_KERNEL)
+BOARD_MKBOOTIMG_ARGS += --cmdline "$(BOARD_KERNEL_CMDLINE)"
+BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
+BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 
 # Build boot img
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/bootimg.mk
