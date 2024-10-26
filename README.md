@@ -84,3 +84,30 @@ mka adbd recoveryimage
 ```bash
 rm -rf out/target/product/surnia/root/vendor
 ```
+
+## ✨ Extras
+
+### Compiling kernel
+
+Download kernel source and cross compiler
+
+```bash
+mkdir ~/surnia-kernel
+cd ~/surnia-kernel
+
+git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 --depth=1 -b ndk-release-r21
+git clone https://github.com/MOTO-M8916/android_kernel_motorola_msm8916 -b lineage-19.1 --depth=1
+```
+
+Set variables
+```bash
+export CROSS_COMPILE=~/surnia-kernel/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+export ARCH=arm && export SUBARCH=arm
+```
+
+Build kernel
+```bash
+cd ~/surnia-kernel/android_kernel_motorola_msm8916
+make surnia_defconfig
+make -j$(nproc --all)
+```

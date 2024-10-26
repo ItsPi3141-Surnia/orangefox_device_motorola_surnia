@@ -52,21 +52,10 @@ BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x01000000
-BOARD_KERNEL_SEPARATED_DT := true
-
-# These are just for reference
-# BOARD_KERNEL_OFFSET := 0x00008000
-# BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
-# BOARD_KERNEL_TAGS_OFFSET := 0x00000100
-# BOARD_DTB_OFFSET := 0x00000000
+BOARD_KERNEL_SEPARATED_DT := false
 
 # Prebuilt
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dt.img
-
-# We aren't building the kernel because it's already prebuilt
-# TARGET_KERNEL_SOURCE := kernel/motorola/msm8916
-# TARGET_KERNEL_CONFIG := surnia_defconfig
 
 # usage: mkbootimg
 #        --kernel <filename>
@@ -79,10 +68,8 @@ TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dt.img
 #        [ --ramdisk_offset <address> ]
 #        [ --dt <filename> ]
 #        -o|--output <filename> # don't worry about this one, it's in bootimg.mk
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) 
-# BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET) --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
-BOARD_MKBOOTIMG_ARGS += --dt $(TARGET_PREBUILT_DTB)
 
 # Build boot img
 BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/bootimg.mk
