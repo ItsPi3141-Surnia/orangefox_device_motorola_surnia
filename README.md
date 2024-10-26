@@ -41,6 +41,11 @@ git clone -b orangefox-12.1 https://github.com/ItsPi3141-Surnia/orangefox_device
 
 ### Download additional dependencies
 
+#### kernel
+```bash
+git clone https://github.com/ItsPi3141-Surnia/kernel_motorola_msm8916 ./kernel/motorola/msm8916 -b twrp --depth=1
+```
+
 #### qcom common
 
 ```bash
@@ -83,31 +88,4 @@ mka adbd recoveryimage
 
 ```bash
 rm -rf out/target/product/surnia/root/vendor
-```
-
-## ✨ Extras
-
-### Compiling kernel
-
-Download kernel source and cross compiler
-
-```bash
-mkdir ~/surnia-kernel
-cd ~/surnia-kernel
-
-git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9 --depth=1 -b lineage-19.1 toolchain
-git clone https://github.com/ItsPi3141-Surnia/kernel_motorola_msm8916 -b twrp --depth=1 kernel
-```
-
-Set variables
-```bash
-export CROSS_COMPILE=~/surnia-kernel/toolchain/bin/arm-linux-androideabi-
-export ARCH=arm && export SUBARCH=arm
-```
-
-Build kernel
-```bash
-cd ~/surnia-kernel/kernel
-make surnia_defconfig
-make -j$(nproc --all)
 ```

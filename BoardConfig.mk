@@ -49,33 +49,24 @@ BOARD_KERNEL_CMDLINE := \
 	enforcing=0 # same as selinux=permissive
 
 BOARD_KERNEL_IMAGE_NAME := zImage
-BOARD_KERNEL_BASE := 0x80000000
+BOARD_KERNEL_SEPARATED_DT := true
+
 BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_BASE := 0x80000000
 BOARD_RAMDISK_OFFSET := 0x01000000
-BOARD_KERNEL_SEPARATED_DT := false
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_DTB_OFFSET := 0x00000000
 
-# Prebuilt
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
+TARGET_KERNEL_SOURCE := kernel/motorola/msm8916
+TARGET_KERNEL_CONFIG := surnia_defconfig
 
-# usage: mkbootimg
-#        --kernel <filename>
-#        --ramdisk <filename>
-#        [ --second <2ndbootloader-filename> ]
-#        [ --cmdline <kernel-commandline> ]
-#        [ --board <boardname> ]
-#        [ --base <address> ]
-#        [ --pagesize <pagesize> ]
-#        [ --ramdisk_offset <address> ]
-#        [ --dt <filename> ]
-#        -o|--output <filename> # don't worry about this one, it's in bootimg.mk
-BOARD_MKBOOTIMG_ARGS := --kernel $(TARGET_PREBUILT_KERNEL)
-BOARD_MKBOOTIMG_ARGS += --cmdline "$(BOARD_KERNEL_CMDLINE)"
-BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
-BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
-BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
-
-# Build boot img
-BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/bootimg.mk
+# See https://github.com/LineageOS/android_vendor_lineage/blob/master/config/BoardConfigKernel.mk
+TARGET_KERNEL_CLANG_COMPILE := false
+TARGET_KERNEL_NO_GCC := true
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
+KERNEL_TOOLCHAIN := $(abspath .)/prebuilts/gcc/$(HOST_PREBUILT_TAG)/arm/arm-linux-androideabi-4.9/bin
 
 # Don't know why it's set to this date tbh
 PLATFORM_SECURITY_PATCH := 2029-10-01
